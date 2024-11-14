@@ -36,11 +36,11 @@ const setupPolyfills = async () => {
 setupPolyfills();
 AppRegistry.registerComponent(appName, () => App);
 
-// Globally define the reactNative property in RequestInit
-// No need for interface declaration in JavaScript
-global.RequestInit = {
-  ...global.RequestInit, // Preserve existing properties if any
-  reactNative: {
-    textStreaming: true,
-  },
-};
+// // Globally define the reactNative property in RequestInit
+// // No need for interface declaration in JavaScript
+// global.RequestInit = {
+//   ...global.RequestInit, // Preserve existing properties if any
+//   reactNative: {
+//     textStreaming: true,
+//   },
+// };

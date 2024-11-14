@@ -5,22 +5,22 @@ import { StyleSheet, Text, View } from "react-native";
 import { Pressable } from "react-native";
 
 // Mock API response function
-export async function mockApiResponse() {
-  const encoder = new TextEncoder();
-  const stream = new ReadableStream({
-    async start(controller) {
-      //convert this array in a array of words
-      const messages =['This', 'is', 'a', 'mock', 'API', 'response', 'for', 'demo.', 'It', 'is', 'streamed', 'to', 'the', 'client', 'to', 'demonstrate', '[benefit', 'of', 'streaming,', 'e.g.,', 'reduced', 'latency,', 'handling', 'large', 'data].', 'You', 'can', 'add', 'more', 'messages', 'here', 'to', 'simulate', 'different', 'data', 'points', 'or', 'events.', 'This', 'is', 'the', 'end', 'of', 'the', 'response,', 'indicating', 'a', 'successful', 'completion.'].map((word) => word + ' ');
-      for (const message of messages) {
-        controller.enqueue(encoder.encode(message));
-        await new Promise(resolve => setTimeout(resolve, 500)); // Simulate delay
-      }
-      controller.close();
-    },
-  });
+// export async function mockApiResponse() {
+//   const encoder = new TextEncoder();
+//   const stream = new ReadableStream({
+//     async start(controller) {
+//       //convert this array in a array of words
+//       const messages =['This', 'is', 'a', 'mock', 'API', 'response', 'for', 'demo.', 'It', 'is', 'streamed', 'to', 'the', 'client', 'to', 'demonstrate', '[benefit', 'of', 'streaming,', 'e.g.,', 'reduced', 'latency,', 'handling', 'large', 'data].', 'You', 'can', 'add', 'more', 'messages', 'here', 'to', 'simulate', 'different', 'data', 'points', 'or', 'events.', 'This', 'is', 'the', 'end', 'of', 'the', 'response,', 'indicating', 'a', 'successful', 'completion.'].map((word) => word + ' ');
+//       for (const message of messages) {
+//         controller.enqueue(encoder.encode(message));
+//         await new Promise(resolve => setTimeout(resolve, 500)); // Simulate delay
+//       }
+//       controller.close();
+//     },
+//   });
 
-  return new Response(stream);
-}
+//   return new Response(stream);
+// }
 
 export default function Index() {
   const [response, setResponse] = useState("");
@@ -30,10 +30,7 @@ export default function Index() {
     setResponse("");
     setIsStreaming(true);
 
-    // Use the mock API response in development or testing
-    const response = process.env.NODE_ENV === 'development' 
-      ? await mockApiResponse() 
-      : await fetch("http://localhost:8081/ai"); 
+    const response = await fetch("https://streamingtest-868293417709.us-central1.run.app/"); 
 
     const reader = response.body?.pipeThrough(new TextDecoderStream()).getReader();
 
