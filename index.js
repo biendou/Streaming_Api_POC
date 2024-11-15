@@ -1,7 +1,7 @@
 import { AppRegistry } from 'react-native';
 import App from './App';
 import { name as appName } from './app.json';
-import TextEncoder from "react-native-fast-encoder";
+import { TextDecoder } from "text-encoding";
 
 const setupPolyfills = async () => {
   const { polyfillGlobal } = await import(
@@ -17,7 +17,7 @@ const setupPolyfills = async () => {
     "react-native-fetch-api"
   );
 
-  polyfillGlobal("TextDecoder", () => TextEncoder);
+  polyfillGlobal("TextDecoder", () => TextDecoder);
   polyfillGlobal("ReadableStream", () => ReadableStream);
   polyfillGlobal("TransformStream", () => TransformStream);
   polyfillGlobal("TextEncoderStream", () => TextEncoderStream);
