@@ -29,8 +29,8 @@ export default function Index() {
   const handlePress = useCallback(async () => {
     setResponse("");
     setIsStreaming(true);
-
-    const response = await fetch("https://streamingtest-868293417709.us-central1.run.app/"); 
+    const response = await fetch("http://localhost:3000/"); 
+    // const response = await fetch("https://streamingtest-868293417709.us-central1.run.app/"); 
 
     const reader = response.body?.pipeThrough(new TextDecoderStream()).getReader();
 
